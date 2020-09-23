@@ -27,11 +27,16 @@ namespace Seek
                 if (key.Equals(i.key))
                     return i.value;
             }
-            return null;
+            return default(Val);
         }
 
         public void Put(Key key,Val value)
         {
+            if(value == null)
+            {
+                Delete(key);
+                return;
+            }
             for(Node i = first;i != null;i = i.next)
             {
                 if (key.Equals(i.key))
