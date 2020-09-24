@@ -6,27 +6,12 @@ namespace Seek
     {
         static void Main(string[] args)
         {
-            SequentionalSearch<string,int> ST = new SequentionalSearch<string, int>();
-            ST.Put("A",2);
-            ST.Put("B",4);
-            ST.Put("C",7);
-            Console.WriteLine("Size: {0}",ST.Size());
-            foreach(string k in ST.Keys())
-                Console.WriteLine("{0}: {1}",k,ST.Get(k));
+            string fileName = args[0];
+            Search<string, int> ST = new SequentionalSearch<string, int>();
+            FrequencyCounter fc = new FrequencyCounter(ST);
+            var res = fc.OneCounter(fileName);
+            Console.WriteLine("MaxWord: {0} of {1},Time: {2}",res.maxWord, ST.Get(res.maxWord),res.timeSpan);
 
-            ST.Put("D", 9);
-            ST.Put("E", 11);
-            ST.Put("B", 12);
-            Console.WriteLine("Size: {0}", ST.Size());
-            foreach (string k in ST.Keys())
-                Console.WriteLine("{0}: {1}", k, ST.Get(k));
-
-            ST.Delete("A");
-            ST.Delete("D");
-            ST.Delete("H");
-            Console.WriteLine("Size: {0}", ST.Size());
-            foreach (string k in ST.Keys())
-                Console.WriteLine("{0}: {1}", k, ST.Get(k));
         }
     }
 }

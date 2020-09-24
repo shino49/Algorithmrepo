@@ -3,7 +3,25 @@ using System.Collections.Generic;
 
 namespace Seek
 {
-    public class SequentionalSearch<Key,Val>
+
+    public abstract class Search<Key, Val>
+    {
+        public abstract Val Get(Key key);
+        public abstract void Put(Key key, Val value);
+        public abstract int Size();
+        public abstract void Delete(Key key);
+        public abstract IEnumerable<Key> Keys();
+        public bool Contains(Key key)
+        {
+            return Get(key) != null;
+        }
+
+        public bool IsEmpty()
+        {
+            return Size() == 0;
+        }
+    }
+    public class SequentionalSearch<Key,Val>: Search<Key,Val>
     {
         private Node first = null;
 
@@ -20,7 +38,7 @@ namespace Seek
             }
         }
 
-        public Val Get(Key key)
+        override public Val Get(Key key)
         {
             for(Node i = first;i != null;i = i.next)
             {
@@ -30,7 +48,7 @@ namespace Seek
             return default(Val);
         }
 
-        public void Put(Key key,Val value)
+        override public void Put(Key key,Val value)
         {
             if(value == null)
             {
@@ -48,7 +66,7 @@ namespace Seek
             this.first = new Node(key,value,first);
         }
 
-        public int Size()
+        override public int Size()
         {
             int num = 0;
             for(Node i = first;i != null;i = i.next)
@@ -58,7 +76,7 @@ namespace Seek
             return num;
         }
 
-        public void Delete(Key key)
+        override public void Delete(Key key)
         {
             Node lastNode = null;
             for(Node i = first;i != null;i = i.next)
@@ -78,7 +96,7 @@ namespace Seek
             }
         }
 
-        public IEnumerable<Key> Keys()
+        override public IEnumerable<Key> Keys()
         {
             for(Node i = first;i != null;i = i.next)
             {

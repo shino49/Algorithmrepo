@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Sort
 {
@@ -6,7 +6,7 @@ namespace Sort
     {
         static void Main(string[] args)
         {
-            var Arr = SortHelp.ArrayGenerate(79,1,1000);
+            var Arr = SortHelp.ArrayGenerate(3000,1,10000);
             String[] methodList = {"select","bubble","insert","shell"};
             foreach(String name in methodList)
             {
